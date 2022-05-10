@@ -1,11 +1,5 @@
 //Sam Moores
-//Project 04
-//
-//
-//
-//
-//
-//
+//Project 04 - CS52
 
 #include <iostream>
 
@@ -15,8 +9,6 @@ struct Container {
 	int* data = nullptr;
 };
 
-//Constructs a Container c with a size s and initial value val
-//Defaults are zero
 void construct_container(Container& c, int s, int val);
 
 void destroy_container(Container& c);
@@ -76,22 +68,31 @@ int main() {
 	std::cout << "back(a) = " << back(a) << std::endl;
 
 	std::cout << "\n//destory container a\n";
+	std::cout << "destroy_container(a)\n";
 	destroy_container(a);
+
+	std::cout << "a = ";
+	for (int i = 0; i < a.size; i++)
+	{
+		std::cout << a.data[i] << " ";
+	}
 
 	std::cout << "\n//Exception Handling";
 
 	try {
-		std::cout << "\nfront(a) = " << front(a) << std::endl;
+		std::cout << "\nfront(a) = ";
+		std::cout << front(a);
 	}
 	catch (std::out_of_range e) { std::cerr << e.what(); }
 
 	try {
-		std::cout << "at(a, 9) = " << at(a, 9) << std::endl;
+		std::cout << "at(a, 9) = ";
+		std::cout << at(a, 9);
 	}
 	catch (std::string msg) { std::cerr << "\n" << msg << std::endl; }
 
 	std::cout <<
-	"\n\n-------------------------------------------------------------";
+	"\n-------------------------------------------------------------";
 
 	std::cout << "\n//Container b\nconstruct_container(b)\n";
 
@@ -208,7 +209,11 @@ int main() {
 	{
 		std::cout << *(ptr + i) << " ";
 	}
+
 	std::cout << "\n//Destroy container";
+	destroy_container(b);
+	std::cout << "\nsize(b) is " << size(b);
+	std::cout << "; capacity(b) is " << capacity(b) << std::endl;
 
 
 	return 0;
@@ -230,7 +235,9 @@ void construct_container(Container& c, int s, int val)
 
 void destroy_container(Container& c)
 {
-	delete c.data;
+	c.size = 0;
+	c.capacity = 0;
+	delete[] c.data;
 }
 
 int* data(Container& c)
@@ -338,7 +345,3 @@ int find(Container& c, int key)
 	}
 	return -1;
 }
-
-
-
-
